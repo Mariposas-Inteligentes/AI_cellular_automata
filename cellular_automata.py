@@ -8,7 +8,7 @@ import numpy
 
 size = 200
 matrix = [[0 for _ in range(size)] for _ in range(size)]
-new_vector = [size]
+new_vector = [0 for _ in range(size)]
 neighborhood = 1
 file_path = "./data.txt"
 
@@ -17,30 +17,31 @@ def determine_value(value1, value2, value3, rule):
     if (value1 == 1):
         if (value2 == 1):
             if (value3 == 1):
-                new_value = rule[7] # 111
+                new_value = rule[0] # 111
             else: # value3 == 0
-                new_value = rule[6] # 110
+                new_value = rule[1] # 110
         else: # value2 == 0
             if (value3 == 1):
-                new_value = rule[5] # 101
+                new_value = rule[2] # 101
             else: # value3 == 0
-                new_value = rule[4] # 100
+                new_value = rule[3] # 100
     else:
         if (value2 == 1):
             if (value3 == 1):
-                new_value = rule[3] # 011
+                new_value = rule[4] # 011
             else: # value3 == 0
-                new_value = rule[2] # 010
+                new_value = rule[5] # 010
         else: # value2 == 0
             if (value3 == 1):
-                new_value = rule[1] # 001
+                new_value = rule[6] # 001
             else: # value3 == 0
-                new_value = rule[0] # 000
+                new_value = rule[7] # 000
     return new_value
 
 def algorithm(neighborhood, row, rule):
     global matrix
     global new_vector
+    global size
     for i in range(0, size):
         # value2 value1 value3
         value1 = matrix[row][i]
@@ -113,7 +114,7 @@ def main():
 
         algorithm(neighborhood, i, rule)
         matrix[i+1] = new_vector  # TODO: reescribir
-        print(matrix)
+        print(matrix[i+1])
     
     
 
