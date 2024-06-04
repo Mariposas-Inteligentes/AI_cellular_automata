@@ -59,7 +59,7 @@ def algorithm(neighborhood, row, rule):
         print("new_value = ", new_value, " values: ", value2, ",", value1, ",", value3)
 
         new_vector[i] = new_value
-        # color_pixel(new_value, row, i)
+        color_pixel(new_value, row, i)
         
 def color_pixel(new_value, row, column):
     color = (255, 255, 255)
