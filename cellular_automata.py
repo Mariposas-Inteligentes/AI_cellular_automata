@@ -5,32 +5,33 @@ import pygame
 import numpy
 
 can_continue = True
+file_or_fixed = input("Digite 1 si desea leer del archivo el estado inicial: ")
 
 # Screen configuration
 pygame.init()
 size_pygame = 4
-screen = pygame.display.set_mode((800, 800))
+screen = pygame.display.set_mode((700, 700))
 pygame.display.set_caption("Cellular automata")
-# screen.fill((255, 255, 255))
 
 clock = pygame.time.Clock()
 
 size = 200
-rule_number = 45
+rule = [int(digit) for digit in range(0,8)]
 
 
 # Variables
 matrix = [[0 for _ in range(size)] for _ in range(size)]
 file_path = "./data.txt"
 
-
-# Calculate rule actual value
-# Convert the integer to a binary string and remove the '0b' prefix
-binary_representation = bin(rule_number)[2:]
-# Ensure the binary string has exactly 8 digits by padding with leading zeros if necessary
-binary_representation = binary_representation.zfill(8)
-# Convert the binary string to an array of digits
-rule = [int(digit) for digit in binary_representation]
+def set_rule(rule_number): 
+  global rule
+  # Calculate rule actual value
+  # Convert the integer to a binary string and remove the '0b' prefix
+  binary_representation = bin(rule_number)[2:]
+  # Ensure the binary string has exactly 8 digits by padding with leading zeros if necessary
+  binary_representation = binary_representation.zfill(8)
+  # Convert the binary string to an array of digits
+  rule = [int(digit) for digit in binary_representation]
 
 
 def draw_row(row):
@@ -74,22 +75,37 @@ def algorithm(to_row):
 
 
 
+set_rule(78)
 
-# Read the file
-with open(file_path, 'r') as file:
-  data = file.read()
-  counter = len(data)
-  for i in range(0, counter):
-    matrix[0][i] = int(data[i])
+if (file_or_fixed == '1'):
+  # Read the file
+  with open(file_path, 'r') as file:
+    data = file.read()
+    counter = len(data)
+    for i in range(0, counter):
+      matrix[0][i] = int(data[i])
+else:
+  # Fijo (no estoy segura si es fijo o periódico): rule 45
+  # matrix[0][int(size/2)] = 1
+ 
+  ##  Pruebas que no sé qué son: 
+  # Rule 187
+  # matrix[0][int(size/4)] = 1
 
-  matrix[0][int(size/2)] = 1
+  # Rule 176
+  # matrix[0][int(size/3)] = 1
+
+  # Rule 55 (mi compu se murió corriéndola)
+  # matrix[0][50] = 1
+  matrix[0][100] = 1
+
 
 
 first_time = True
+screen.fill((0,0,0))
+
 # Calculate results
 while(can_continue):
-  print("Estado\n", matrix, "\n")
-  screen.fill((0,0,0))
   start = 0
   if first_time:
     start = 1
