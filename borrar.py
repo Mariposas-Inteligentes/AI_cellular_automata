@@ -72,6 +72,7 @@ def main():
     global matrix
     global new_vector
     global screen
+    global size
 
     with open(file_path, 'r') as file:
         data = file.read()
@@ -104,17 +105,18 @@ def main():
 
     can_continue = True
 
-    # while(can_continue):
-    for i in range(0, 1):
-        for event in pygame.event.get():
-        # Event to quit found, then quit
-            if event.type == pygame.QUIT:
-                can_continue = False
-                break
+    while(can_continue):
+        for i in range(0, size):
+            for event in pygame.event.get():
+            # Event to quit found, then quit
+                if event.type == pygame.QUIT:
+                    can_continue = False
+                    break
 
-        algorithm(neighborhood, i, rule)
-        matrix[i+1] = new_vector  # TODO: reescribir
-        print(matrix[i+1])
+            algorithm(neighborhood, i, rule)
+            if i + 1 < size:
+                matrix[i+1] = new_vector  # TODO: reescribir
+                print(matrix[i+1])
     
     
 
