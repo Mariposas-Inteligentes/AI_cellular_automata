@@ -1,9 +1,7 @@
-# Luis Solano, Angie Solís y Emilia Víquez
-
 import pygame
 
 can_continue = True
-file_or_fixed = input("Digite 1 si desea leer del archivo el estado inicial: ")
+file_or_fixed = input("To read the initial state from a file, type 1: ")
 
 # Screen configuration
 pygame.init()
@@ -13,23 +11,21 @@ pygame.display.set_caption("Cellular automata")
 
 clock = pygame.time.Clock()
 
+# Variables
 size = 200
 rule = [int(digit) for digit in range(0,8)]
-
-# Variables
 matrix = [[0 for _ in range(size)] for _ in range(size)]
 file_path = "./data.txt"
 
 def set_rule(rule_number): 
   global rule
   # Calculate rule actual value
-  # Convert the integer to a binary string and remove the '0b' prefix
+  # Convert the integer to a binary string
   binary_representation = bin(rule_number)[2:]
   # Ensure the binary string has exactly 8 digits by padding with leading zeros if necessary
   binary_representation = binary_representation.zfill(8)
   # Convert the binary string to an array of digits
   rule = [int(digit) for digit in binary_representation]
-
 
 def draw_row(row):
   global matrix, size_pygame, screen
@@ -50,7 +46,6 @@ def draw_row(row):
                       size_pygame))
   pygame.display.flip()
 
-
 def calculate_value(left, center, right):
   global rule
   index = 4 * left + 2 * center + right
@@ -70,7 +65,9 @@ def algorithm(to_row):
     right = matrix[from_row][(col + 1) % size]
     matrix[to_row][col] = calculate_value(left, center, right)
 
-set_rule(45)
+
+# Define rule and initial state
+set_rule(90)
 
 if (file_or_fixed == '1'):
   # Read the file
@@ -80,22 +77,8 @@ if (file_or_fixed == '1'):
     for i in range(0, counter):
       matrix[0][i] = int(data[i])
 else:
-  # Fijo (no estoy segura si es fijo o periódico): rule 45
-  matrix[0][int(size/2)] = 1
- 
-  ##  Pruebas que no sé qué son: 
-  # Rule 187
-  # matrix[0][int(size/4)] = 1
-
-  # Rule 176
-  #matrix[0][int(size/3)] = 1
-
-  # Rule 55 (mi compu se murió corriéndola)
-  #matrix[0][50] = 1
-
-  # Rule 78 idk qué es
-
-  #matrix[0][100] = 1
+  matrix[0][1] = 1
+  matrix[0][2] = 1
 
 
 first_time = True
@@ -118,7 +101,9 @@ while(can_continue):
         can_continue = False
         break
 
+# Stop execution
 clock.tick(60)
 draw_row(len(matrix[0])-1)
 pygame.quit()
-print("Iteraciones completadas: ", iterations)
+
+print("Completed iterations: ", iterations)
