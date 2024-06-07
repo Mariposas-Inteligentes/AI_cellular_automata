@@ -1,8 +1,6 @@
 # Luis Solano, Angie Solís y Emilia Víquez
 
-import argparse
 import pygame
-import numpy
 
 can_continue = True
 file_or_fixed = input("Digite 1 si desea leer del archivo el estado inicial: ")
@@ -17,7 +15,6 @@ clock = pygame.time.Clock()
 
 size = 200
 rule = [int(digit) for digit in range(0,8)]
-
 
 # Variables
 matrix = [[0 for _ in range(size)] for _ in range(size)]
@@ -73,9 +70,7 @@ def algorithm(to_row):
     right = matrix[from_row][(col + 1) % size]
     matrix[to_row][col] = calculate_value(left, center, right)
 
-
-
-set_rule(78)
+set_rule(45)
 
 if (file_or_fixed == '1'):
   # Read the file
@@ -86,23 +81,26 @@ if (file_or_fixed == '1'):
       matrix[0][i] = int(data[i])
 else:
   # Fijo (no estoy segura si es fijo o periódico): rule 45
-  # matrix[0][int(size/2)] = 1
+  matrix[0][int(size/2)] = 1
  
   ##  Pruebas que no sé qué son: 
   # Rule 187
   # matrix[0][int(size/4)] = 1
 
   # Rule 176
-  # matrix[0][int(size/3)] = 1
+  #matrix[0][int(size/3)] = 1
 
   # Rule 55 (mi compu se murió corriéndola)
-  # matrix[0][50] = 1
-  matrix[0][100] = 1
+  #matrix[0][50] = 1
 
+  # Rule 78 idk qué es
+
+  #matrix[0][100] = 1
 
 
 first_time = True
 screen.fill((0,0,0))
+iterations = 0
 
 # Calculate results
 while(can_continue):
@@ -113,6 +111,7 @@ while(can_continue):
   for i in range(start, size):
     clock.tick(60)
     algorithm(i)
+    iterations += 1
     for event in pygame.event.get():
       # Event to quit found, then quit
       if event.type == pygame.QUIT:
@@ -122,7 +121,4 @@ while(can_continue):
 clock.tick(60)
 draw_row(len(matrix[0])-1)
 pygame.quit()
-  
-
-   
-
+print("Iteraciones completadas: ", iterations)
