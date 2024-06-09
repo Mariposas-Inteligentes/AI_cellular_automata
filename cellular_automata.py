@@ -49,7 +49,7 @@ def draw_row(row):
 def calculate_value(left, center, right):
   global rule
   index = 4 * left + 2 * center + right
-  return rule[index]
+  return rule[7 - index]
 
 def algorithm(to_row):
   global size, rule, matrix, screen
@@ -67,7 +67,7 @@ def algorithm(to_row):
 
 
 # Define rule and initial state
-set_rule(90)
+set_rule(30)
 
 if (file_or_fixed == '1'):
   # Read the file
@@ -77,8 +77,7 @@ if (file_or_fixed == '1'):
     for i in range(0, counter):
       matrix[0][i] = int(data[i])
 else:
-  matrix[0][1] = 1
-  matrix[0][2] = 1
+  matrix[0][99] = 1
 
 
 first_time = True
@@ -103,7 +102,7 @@ while(can_continue):
 
 # Stop execution
 clock.tick(60)
-draw_row(len(matrix[0])-1)
+draw_row(size - 1)
 pygame.quit()
 
 print("Completed iterations: ", iterations)
