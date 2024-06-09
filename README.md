@@ -1,6 +1,6 @@
 # Cellular automata
 
-## Requierements
+## Requirements
 
 The library `pygame` is required for this script.
 
@@ -22,7 +22,7 @@ Then, the terminal will show:
 
 By typing `1` the initial state will be read from `./data.txt`. Otherwise, the default initial state will be used.
 
-After that, an screen will pop and show the automata.
+After that, a screen will pop and show the automata.
 
 When the screen is closed, the terminal will print the quantity of finished iterations:
 
