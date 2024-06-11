@@ -18,9 +18,15 @@ Then, the terminal will show:
 
     pygame 2.5.1 (SDL 2.28.2, Python 3.11.9)
     Hello from the pygame community. https://www.pygame.org/contribute.html
-    To read the initial state from a file, type 1: 
+    To read the initial state from a file, type 1. To use a random state type 2:
 
-By typing `1` the initial state will be read from `./data.txt`. Otherwise, the default initial state will be used.
+- By typing `1` the initial state will be read from `./data.txt`. 
+
+- By typing `2`, the program will requiere the number of random positions to be asigned to `1`:
+
+        Type the number of random positions to be generated (0 to 199):
+
+- Otherwise, the default initial state will be used.
 
 After that, a screen will pop and show the automata.
 

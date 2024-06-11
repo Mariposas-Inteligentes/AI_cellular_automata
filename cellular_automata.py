@@ -1,7 +1,8 @@
 import pygame
+import random
 
 can_continue = True
-file_or_fixed = input("To read the initial state from a file, type 1: ")
+file_or_fixed = input("To read the initial state from a file, type 1. To use a random state type 2: ")
 
 # Screen configuration
 pygame.init()
@@ -76,6 +77,13 @@ if (file_or_fixed == '1'):
     counter = len(data)
     for i in range(0, counter):
       matrix[0][i] = int(data[i])
+elif (file_or_fixed == '2'):
+  n = 200
+  while (n > 199 or n < 0):  # while it is invalid
+    n = int(input("Type the number of random positions to be generated (0 to 199): "))
+  for i in range (0, n):
+    pos = random.randint(0, 199)
+    matrix[0][pos] = 1
 else:
   matrix[0][99] = 1
 
